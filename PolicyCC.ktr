@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>PolicyStaging</name>
+    <name>PolicyCC</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -498,23 +498,23 @@
   </connection>
   <order>
     <hop>
-      <from>Data Polis &#x28;Grace, Inforce&#x29;</from>
+      <from>Data CC Aktif</from>
       <to>Merge Join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sum Insured</from>
+      <from>Policy Billing CC</from>
       <to>Merge Join</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Merge Join</from>
-      <to>Insert Only Data Policy</to>
+      <to>Update Data AC</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Data Polis &#x28;Grace, Inforce&#x29;</name>
+    <name>Data CC Aktif</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -525,7 +525,7 @@
       <schema_name/>
     </partitioning>
     <connection>Life21Dev</connection>
-    <sql>SELECT &#xd;&#xa;	p.&#x60;policy_id&#x60;,&#xd;&#xa;	p.&#x60;policy_no&#x60;,&#xd;&#xa;	p.&#x60;policy_payment_method&#x60;,&#xd;&#xa;	p.policy_commence_dt,&#xd;&#xa;	p.policy_due_dt,&#xd;&#xa;	p.&#x60;policy_due_dt_pre&#x60;,&#xd;&#xa;	p.policy_product_id,&#xd;&#xa;	pd.&#x60;product_code&#x60;,&#xd;&#xa;	p.policy_holder_id,&#xd;&#xa;	p.policy_regular_premium,&#xd;&#xa;	p.Policy_status,&#xd;&#xa;	CONCAT&#x28;&#x27;77888&#x27; ,p.&#x60;policy_no&#x60; &#x29;AS VA,&#xd;&#xa;	c.&#x60;customer_name&#x60;,&#xd;&#xa;	p.&#x60;policy_premium_mode&#x60;&#xd;&#xa;FROM policy p&#xd;&#xa;INNER JOIN product pd ON p.&#x60;policy_product_id&#x60;&#x3d;pd.&#x60;product_id&#x60;&#xd;&#xa;LEFT JOIN customer c ON c.&#x60;customer_id&#x60;&#x3d;p.&#x60;policy_holder_id&#x60;&#xd;&#xa;WHERE p.&#x60;policy_premium_mode&#x60; &#x3c;&#x3e; 0&#xd;&#xa;AND p.&#x60;policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;&#xd;&#xa;ORDER BY p.&#x60;policy_id&#x60;</sql>
+    <sql>SELECT DISTINCT &#x60;policy_id&#x60;,&#xd;&#xa;	&#x60;cc_no&#x60;,&#xd;&#xa;	&#x60;cc_expiry&#x60;,&#xd;&#xa;	&#x60;cc_name&#x60;,&#xd;&#xa;	NULLIF&#x28;TRIM&#x28;&#x60;cc_address&#x60;&#x29;,&#x27;&#x27;&#x29; cc_address,&#xd;&#xa;	NULLIF&#x28;TRIM&#x28;&#x60;cc_telephone&#x60;&#x29;,&#x27;&#x27;&#x29; cc_telephone,&#xd;&#xa;	acquirer_bank_id&#xd;&#xa;FROM &#x60;policy_cc&#x60; &#xd;&#xa;WHERE STATUS&#x3d;1&#xd;&#xa;order by &#x60;policy_id&#x60;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -539,121 +539,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>Insert Only Data Policy</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>JBS</connection>
-    <commit>1000</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>policy_billing</table>
-      <key>
-        <name>policy_id</name>
-        <field>policy_Id</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>policy_Id</name>
-        <rename>policy_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>policy_no</name>
-        <rename>policy_no</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>policy_payment_method</name>
-        <rename>policy_payment_method</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_commence_dt</name>
-        <rename>policy_commence_dt</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>policy_due_dt</name>
-        <rename>policy_due_dt</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>policy_due_dt_pre</name>
-        <rename>policy_due_dt_pre</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_product_id</name>
-        <rename>policy_product_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_product_code</name>
-        <rename>product_code</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_holder_id</name>
-        <rename>policy_holder_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>Policy_status</name>
-        <rename>Policy_status</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>VANo</name>
-        <rename>VA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>VAName</name>
-        <rename>customer_name</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_sum_insured</name>
-        <rename>jlh</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_regular_premium</name>
-        <rename>policy_regular_premium</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_premium_mode</name>
-        <rename>policy_premium_mode</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>560</xloc>
-      <yloc>48</yloc>
+      <xloc>128</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -670,10 +557,10 @@
       <schema_name/>
     </partitioning>
 <join_type>INNER</join_type>
-<step1>Data Polis &#x28;Grace, Inforce&#x29;</step1>
-<step2>Sum Insured</step2>
+<step1>Policy Billing CC</step1>
+<step2>Data CC Aktif</step2>
     <keys_1>
-      <key>policy_id</key>
+      <key>policy_Id</key>
     </keys_1>
     <keys_2>
       <key>policy_id</key>
@@ -686,14 +573,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
+      <xloc>304</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>Sum Insured</name>
+    <name>Policy Billing CC</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -703,8 +590,8 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Life21Dev</connection>
-    <sql>SELECT policy_id, COUNT&#x28;1&#x29; jlh&#xd;&#xa;FROM policy_insured&#xd;&#xa;GROUP BY policy_id&#xd;&#xa;order by policy_id</sql>
+    <connection>JBS</connection>
+    <sql>SELECT &#x60;policy_Id&#x60; FROM &#x60;policy_billing&#x60; &#xd;&#xa;WHERE &#x60;policy_payment_method&#x60;&#x3d;&#x27;CC&#x27;&#xd;&#xa;order by &#x60;policy_id&#x60;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -718,8 +605,76 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>144</yloc>
+      <xloc>128</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>Update Data AC</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>JBS</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>policy_billing</table>
+      <key>
+        <name>policy_Id</name>
+        <field>policy_Id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cc_no</name>
+        <rename>cc_no</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cc_expiry</name>
+        <rename>cc_expiry</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cc_name</name>
+        <rename>cc_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cc_address</name>
+        <rename>cc_address</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cc_telephone</name>
+        <rename>cc_telephone</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cc_acquirer_bank_id</name>
+        <rename>acquirer_bank_id</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
