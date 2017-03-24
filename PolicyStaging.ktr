@@ -498,23 +498,13 @@
   </connection>
   <order>
     <hop>
-      <from>Data Polis &#x28;Grace, Inforce&#x29;</from>
-      <to>Merge Join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sum Insured</from>
-      <to>Merge Join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge Join</from>
-      <to>Insert Only Data Policy</to>
+      <from>Data master polis</from>
+      <to>Insert &#x2f; Update Data Polis Billing</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Data Polis &#x28;Grace, Inforce&#x29;</name>
+    <name>Data master polis</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -539,14 +529,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>48</yloc>
+      <xloc>128</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>Insert Only Data Policy</name>
+    <name>Insert &#x2f; Update Data Polis Billing</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -557,7 +547,7 @@
       <schema_name/>
     </partitioning>
     <connection>JBS</connection>
-    <commit>1000</commit>
+    <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema/>
@@ -614,6 +604,11 @@
         <update>N</update>
       </value>
       <value>
+        <name>policy_regular_premium</name>
+        <rename>policy_regular_premium</rename>
+        <update>Y</update>
+      </value>
+      <value>
         <name>Policy_status</name>
         <rename>Policy_status</rename>
         <update>Y</update>
@@ -626,16 +621,6 @@
       <value>
         <name>VAName</name>
         <rename>customer_name</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_sum_insured</name>
-        <rename>jlh</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_regular_premium</name>
-        <rename>policy_regular_premium</rename>
         <update>Y</update>
       </value>
       <value>
@@ -652,74 +637,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>Merge Join</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-<join_type>INNER</join_type>
-<step1>Data Polis &#x28;Grace, Inforce&#x29;</step1>
-<step2>Sum Insured</step2>
-    <keys_1>
-      <key>policy_id</key>
-    </keys_1>
-    <keys_2>
-      <key>policy_id</key>
-    </keys_2>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>288</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>Sum Insured</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>Life21Dev</connection>
-    <sql>SELECT policy_id, COUNT&#x28;1&#x29; jlh&#xd;&#xa;FROM policy_insured&#xd;&#xa;GROUP BY policy_id&#xd;&#xa;order by policy_id</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>144</yloc>
+      <xloc>352</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
