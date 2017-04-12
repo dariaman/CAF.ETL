@@ -499,7 +499,7 @@
   <order>
     <hop>
       <from>Data master polis</from>
-      <to>Insert &#x2f; Update Data Polis Billing</to>
+      <to>Insert &#x2f; Update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -515,7 +515,7 @@
       <schema_name/>
     </partitioning>
     <connection>Life21Dev</connection>
-    <sql>SELECT &#xd;&#xa;	p.&#x60;policy_id&#x60;,&#xd;&#xa;	p.&#x60;policy_no&#x60;,&#xd;&#xa;	p.&#x60;policy_payment_method&#x60;,&#xd;&#xa;	p.policy_commence_dt,&#xd;&#xa;	p.policy_due_dt,&#xd;&#xa;	p.&#x60;policy_due_dt_pre&#x60;,&#xd;&#xa;	p.policy_product_id,&#xd;&#xa;	pd.&#x60;product_code&#x60;,&#xd;&#xa;	p.policy_holder_id,&#xd;&#xa;	p.policy_regular_premium,&#xd;&#xa;	p.Policy_status,&#xd;&#xa;	CONCAT&#x28;&#x27;77888&#x27; ,p.&#x60;policy_no&#x60; &#x29;AS VA,&#xd;&#xa;	c.&#x60;customer_name&#x60;,&#xd;&#xa;	p.&#x60;policy_premium_mode&#x60;&#xd;&#xa;FROM policy p&#xd;&#xa;INNER JOIN product pd ON p.&#x60;policy_product_id&#x60;&#x3d;pd.&#x60;product_id&#x60;&#xd;&#xa;LEFT JOIN customer c ON c.&#x60;customer_id&#x60;&#x3d;p.&#x60;policy_holder_id&#x60;&#xd;&#xa;WHERE p.&#x60;policy_premium_mode&#x60; &#x3c;&#x3e; 0&#xd;&#xa;AND p.&#x60;policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;&#xd;&#xa;ORDER BY p.&#x60;policy_id&#x60;</sql>
+    <sql>SELECT &#xd;&#xa;	p.&#x60;policy_id&#x60;,&#xd;&#xa;	p.&#x60;policy_no&#x60;,&#xd;&#xa;	p.&#x60;policy_payment_method&#x60;,&#xd;&#xa;	p.policy_commence_dt,&#xd;&#xa;	p.policy_due_dt,&#xd;&#xa;	p.&#x60;policy_due_dt_pre&#x60;,&#xd;&#xa;	p.policy_product_id,&#xd;&#xa;	pd.&#x60;product_code&#x60;,&#xd;&#xa;	p.policy_holder_id,&#xd;&#xa;	p.policy_regular_premium,&#xd;&#xa;	p.Policy_status,&#xd;&#xa;	CONCAT&#x28;&#x27;77888&#x27; ,p.&#x60;policy_no&#x60; &#x29;AS VA,&#xd;&#xa;	p.&#x60;policy_premium_mode&#x60;,&#xd;&#xa;	c.&#x60;customer_name&#x60;,&#xd;&#xa;	c.&#x60;customer_email&#x60;&#xd;&#xa;FROM policy p&#xd;&#xa;INNER JOIN product pd ON p.&#x60;policy_product_id&#x60;&#x3d;pd.&#x60;product_id&#x60;&#xd;&#xa;LEFT JOIN customer c ON c.&#x60;customer_id&#x60;&#x3d;p.&#x60;policy_holder_id&#x60;&#xd;&#xa;WHERE p.&#x60;policy_premium_mode&#x60; &#x3c;&#x3e; 0&#xd;&#xa;AND p.&#x60;policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;&#xd;&#xa;ORDER BY p.&#x60;policy_id&#x60;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -529,14 +529,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>128</xloc>
+      <xloc>112</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>Insert &#x2f; Update Data Polis Billing</name>
+    <name>Insert &#x2f; Update</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -559,6 +559,11 @@
         <name2/>
       </key>
       <value>
+        <name>policy_premium_mode</name>
+        <rename>policy_premium_mode</rename>
+        <update>Y</update>
+      </value>
+      <value>
         <name>policy_Id</name>
         <rename>policy_id</rename>
         <update>N</update>
@@ -566,7 +571,7 @@
       <value>
         <name>policy_no</name>
         <rename>policy_no</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>policy_payment_method</name>
@@ -576,12 +581,12 @@
       <value>
         <name>policy_commence_dt</name>
         <rename>policy_commence_dt</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>policy_due_dt</name>
         <rename>policy_due_dt</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>policy_due_dt_pre</name>
@@ -599,9 +604,9 @@
         <update>Y</update>
       </value>
       <value>
-        <name>policy_holder_id</name>
+        <name>holder_id</name>
         <rename>policy_holder_id</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>policy_regular_premium</name>
@@ -614,6 +619,16 @@
         <update>Y</update>
       </value>
       <value>
+        <name>HolderName</name>
+        <rename>customer_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>EmailHolder</name>
+        <rename>customer_email</rename>
+        <update>Y</update>
+      </value>
+      <value>
         <name>VANo</name>
         <rename>VA</rename>
         <update>Y</update>
@@ -621,12 +636,7 @@
       <value>
         <name>VAName</name>
         <rename>customer_name</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_premium_mode</name>
-        <rename>policy_premium_mode</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
     </lookup>
     <cluster_schema/>
@@ -637,8 +647,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
-      <yloc>128</yloc>
+      <xloc>320</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
