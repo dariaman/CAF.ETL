@@ -552,6 +552,12 @@
     <lookup>
       <schema/>
       <table>prefixcard</table>
+      <key>
+        <name>Prefix</name>
+        <field>Prefix</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
       <value>
         <name>Description</name>
         <rename>Description</rename>
@@ -560,7 +566,7 @@
       <value>
         <name>Prefix</name>
         <rename>Prefix</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>bank_id</name>
