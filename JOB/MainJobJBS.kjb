@@ -296,15 +296,15 @@
       <schedulerType>2</schedulerType>
       <intervalSeconds>0</intervalSeconds>
       <intervalMinutes>60</intervalMinutes>
-      <hour>23</hour>
+      <hour>18</hour>
       <minutes>0</minutes>
       <weekDay>1</weekDay>
       <DayOfMonth>1</DayOfMonth>
       <parallel>Y</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>224</xloc>
-      <yloc>128</yloc>
+      <xloc>176</xloc>
+      <yloc>208</yloc>
     </entry>
     <entry>
       <name>Job Data Polis</name>
@@ -334,8 +334,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
-      <yloc>192</yloc>
+      <xloc>384</xloc>
+      <yloc>64</yloc>
     </entry>
     <entry>
       <name>Release BillingHold</name>
@@ -369,8 +369,39 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>464</xloc>
-      <yloc>192</yloc>
+      <xloc>496</xloc>
+      <yloc>64</yloc>
+    </entry>
+    <entry>
+      <name>Recurring</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;Recurring.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>288</yloc>
     </entry>
   </entries>
   <hops>
@@ -388,16 +419,25 @@
       <to>Release BillingHold</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>Recurring</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>
     <notepad>
       <note>Job yang jalan dimalam hari &#x28;End of Day&#x29; </note>
       <xloc>240</xloc>
-      <yloc>48</yloc>
+      <yloc>128</yloc>
       <width>230</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
@@ -416,30 +456,9 @@
       <drawshadow>Y</drawshadow>
     </notepad>
     <notepad>
-      <note>Job Yang jalan Pagi hari &#x28;Start Day&#x29;</note>
-      <xloc>96</xloc>
-      <yloc>448</yloc>
-      <width>193</width>
-      <heigth>26</heigth>
-      <fontname/>
-      <fontsize>-1</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
-    <notepad>
       <note>Job yang jalan pagi hari &#x28;start day&#x29;</note>
-      <xloc>272</xloc>
-      <yloc>272</yloc>
+      <xloc>160</xloc>
+      <yloc>304</yloc>
       <width>190</width>
       <heigth>26</heigth>
       <fontname/>
