@@ -297,7 +297,7 @@
       <schedulerType>2</schedulerType>
       <intervalSeconds>0</intervalSeconds>
       <intervalMinutes>5</intervalMinutes>
-      <hour>1</hour>
+      <hour>23</hour>
       <minutes>0</minutes>
       <weekDay>1</weekDay>
       <DayOfMonth>1</DayOfMonth>
