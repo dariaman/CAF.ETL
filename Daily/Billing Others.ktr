@@ -561,12 +561,12 @@
       <value>
         <name>Life21TranID</name>
         <rename>policy_cc_tran_id</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>policy_id</name>
         <rename>policy_id</rename>
-        <update>N</update>
+        <update>Y</update>
       </value>
       <value>
         <name>description</name>

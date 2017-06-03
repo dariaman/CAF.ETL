@@ -468,13 +468,13 @@
   </connection>
   <connection>
     <name>Life21</name>
-    <server>192.168.1.18</server>
+    <server>103.253.68.137</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>prod_life21_04052017</database>
+    <database>prod_life21</database>
     <port>3306</port>
     <username>dariaman</username>
-    <password>Encrypted 2be98afc86aa7f2e49b39bd63c9c2bdde</password>
+    <password>Encrypted 2be98afc86af7b297b80efe62da96aec8</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -515,7 +515,7 @@
       <schema_name/>
     </partitioning>
     <connection>JBSDB</connection>
-    <commit>1000</commit>
+    <commit>5000</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema/>
@@ -554,7 +554,7 @@
       <value>
         <name>commence_dt</name>
         <rename>policy_commence_dt</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>due_dt</name>
@@ -579,16 +579,6 @@
       <value>
         <name>premium_mode</name>
         <rename>policy_premium_mode</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>UserCrt</name>
-        <rename>usrcrt</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>DateCrt</name>
-        <rename>dtcrt</rename>
         <update>N</update>
       </value>
     </lookup>
@@ -618,7 +608,7 @@
       <schema_name/>
     </partitioning>
     <connection>Life21</connection>
-    <sql>SELECT &#xd;&#xa;	p.&#x60;policy_id&#x60;,&#xd;&#xa;	p.&#x60;policy_no&#x60;,&#xd;&#xa;	p.&#x60;policy_payment_method&#x60;,&#xd;&#xa;	p.policy_commence_dt,&#xd;&#xa;	p.policy_due_dt,&#xd;&#xa;	CASE WHEN DATE_FORMAT&#x28;p.policy_commence_dt,&#x27;&#x25;e&#x27;&#x29; &#x3c; 11 THEN 1&#xd;&#xa;	     WHEN DATE_FORMAT&#x28;p.policy_commence_dt,&#x27;&#x25;e&#x27;&#x29; &#x3c; 21 THEN 11&#xd;&#xa;	     ELSE 21&#xd;&#xa;	END AS cycleDate,	&#xd;&#xa;	p.policy_product_id,&#xd;&#xa;	p.policy_holder_id,&#xd;&#xa;	p.policy_regular_premium,&#xd;&#xa;	p.Policy_status,&#xd;&#xa;	p.&#x60;policy_premium_mode&#x60;,&#xd;&#xa;	USER&#x28;&#x29; AS usrcrt,&#xd;&#xa;	CURRENT_TIMESTAMP AS dtcrt&#xd;&#xa;FROM policy p&#xd;&#xa;WHERE p.&#x60;policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;&#xd;&#xa;AND p.policy_premium_mode &#x3e; 0&#xd;&#xa;ORDER BY p.&#x60;policy_id&#x60;&#x3b;</sql>
+    <sql>SELECT &#xd;&#xa;	p.&#x60;policy_id&#x60;,&#xd;&#xa;	p.&#x60;policy_no&#x60;,&#xd;&#xa;	p.&#x60;policy_payment_method&#x60;,&#xd;&#xa;	p.policy_commence_dt,&#xd;&#xa;	p.policy_due_dt,&#xd;&#xa;	CASE WHEN DATE_FORMAT&#x28;p.policy_commence_dt,&#x27;&#x25;e&#x27;&#x29; &#x3c; 11 THEN 1&#xd;&#xa;	     WHEN DATE_FORMAT&#x28;p.policy_commence_dt,&#x27;&#x25;e&#x27;&#x29; &#x3c; 21 THEN 11&#xd;&#xa;	     ELSE 21&#xd;&#xa;	END AS cycleDate,	&#xd;&#xa;	p.policy_product_id,&#xd;&#xa;	p.policy_holder_id,&#xd;&#xa;	p.policy_regular_premium,&#xd;&#xa;	p.Policy_status,&#xd;&#xa;	p.&#x60;policy_premium_mode&#x60;&#xd;&#xa;FROM policy p&#xd;&#xa;WHERE p.&#x60;policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;&#xd;&#xa;AND p.policy_premium_mode &#x3e; 0&#xd;&#xa;ORDER BY p.&#x60;policy_id&#x60;&#x3b;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

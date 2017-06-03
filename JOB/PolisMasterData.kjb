@@ -293,8 +293,8 @@
       <type>SPECIAL</type>
       <start>Y</start>
       <dummy>N</dummy>
-      <repeat>Y</repeat>
-      <schedulerType>2</schedulerType>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
       <intervalSeconds>0</intervalSeconds>
       <intervalMinutes>5</intervalMinutes>
       <hour>23</hour>
@@ -313,7 +313,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;Dariaman&#x5c;CAF.ETL&#x5c;Daily&#x5c;CustomerInfo.ktr</filename>
+      <filename>C&#x3a;&#x5c;Users&#x5c;dariaman.siagian&#x5c;Documents&#x5c;CAF&#x5c;CAF.ETL&#x5c;Daily&#x5c;CustomerInfo.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -348,7 +348,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;Dariaman&#x5c;CAF.ETL&#x5c;Daily&#x5c;PolisBilling.ktr</filename>
+      <filename>C&#x3a;&#x5c;Users&#x5c;dariaman.siagian&#x5c;Documents&#x5c;CAF&#x5c;CAF.ETL&#x5c;Daily&#x5c;PolisBilling.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -383,7 +383,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;Dariaman&#x5c;CAF.ETL&#x5c;Daily&#x5c;PolisVA.ktr</filename>
+      <filename>C&#x3a;&#x5c;Users&#x5c;dariaman.siagian&#x5c;Documents&#x5c;CAF&#x5c;CAF.ETL&#x5c;Daily&#x5c;PolisVA.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -418,7 +418,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;Dariaman&#x5c;CAF.ETL&#x5c;Daily&#x5c;PolisAC.ktr</filename>
+      <filename>C&#x3a;&#x5c;Users&#x5c;dariaman.siagian&#x5c;Documents&#x5c;CAF&#x5c;CAF.ETL&#x5c;Daily&#x5c;PolisAC.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -453,7 +453,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;Dariaman&#x5c;CAF.ETL&#x5c;Daily&#x5c;PolisCC.ktr</filename>
+      <filename>C&#x3a;&#x5c;Users&#x5c;dariaman.siagian&#x5c;Documents&#x5c;CAF&#x5c;CAF.ETL&#x5c;Daily&#x5c;PolisCC.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
