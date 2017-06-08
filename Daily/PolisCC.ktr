@@ -575,15 +575,15 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
+      <xloc>480</xloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>Polis CC Life21</name>
-    <type>TableInput</type>
+    <name>Merge Join</name>
+    <type>MergeJoin</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -592,13 +592,15 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Life21</connection>
-    <sql>SELECT pc.&#x60;policy_id&#x60;,&#xd;&#xa;	pc.&#x60;cc_no&#x60;,&#xd;&#xa;	pc.&#x60;cc_name&#x60;,&#xd;&#xa;	pc.&#x60;cc_expiry&#x60;,&#xd;&#xa;	NULLIF&#x28;TRIM&#x28;pc.&#x60;cc_address&#x60;&#x29;,&#x27;&#x27;&#x29; AS alamat,&#xd;&#xa;	NULLIF&#x28;TRIM&#x28;pc.cc_telephone&#x29;,&#x27;&#x27;&#x29; AS telephone&#xd;&#xa;FROM &#x60;policy_cc&#x60; pc &#xd;&#xa;WHERE pc.&#x60;status&#x60;&#x3d;1&#xd;&#xa;ORDER BY pc.&#x60;policy_Id&#x60;&#x3b;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+<join_type>INNER</join_type>
+<step1>Polis Billing CC</step1>
+<step2>Polis CC Life21</step2>
+    <keys_1>
+      <key>policy_id</key>
+    </keys_1>
+    <keys_2>
+      <key>policy_id</key>
+    </keys_2>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -607,8 +609,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>144</yloc>
+      <xloc>240</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -646,8 +648,8 @@
     </step>
 
   <step>
-    <name>Merge Join</name>
-    <type>MergeJoin</type>
+    <name>Polis CC Life21</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -656,15 +658,13 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-<join_type>INNER</join_type>
-<step1>Polis Billing CC</step1>
-<step2>Polis CC Life21</step2>
-    <keys_1>
-      <key>policy_id</key>
-    </keys_1>
-    <keys_2>
-      <key>policy_id</key>
-    </keys_2>
+    <connection>Life21</connection>
+    <sql>SELECT pc.&#x60;policy_id&#x60;,&#xd;&#xa;	pc.&#x60;cc_no&#x60;,&#xd;&#xa;	pc.&#x60;cc_name&#x60;,&#xd;&#xa;	pc.&#x60;cc_expiry&#x60;,&#xd;&#xa;	NULLIF&#x28;TRIM&#x28;pc.&#x60;cc_address&#x60;&#x29;,&#x27;&#x27;&#x29; AS alamat,&#xd;&#xa;	NULLIF&#x28;TRIM&#x28;pc.cc_telephone&#x29;,&#x27;&#x27;&#x29; AS telephone&#xd;&#xa;FROM &#x60;policy_cc&#x60; pc &#xd;&#xa;WHERE pc.&#x60;status&#x60;&#x3d;1&#xd;&#xa;ORDER BY pc.&#x60;policy_Id&#x60;&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
     <cluster_schema/>
     <remotesteps>
       <input>
@@ -673,8 +673,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
-      <yloc>96</yloc>
+      <xloc>96</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
     </step>

@@ -525,7 +525,7 @@
       <schema_name/>
     </partitioning>
     <connection>JBSDB</connection>
-    <commit>100</commit>
+    <commit>500</commit>
     <update_bypassed>Y</update_bypassed>
     <lookup>
       <schema/>
@@ -539,7 +539,7 @@
       <value>
         <name>receipt_id</name>
         <rename>receipt_id</rename>
-        <update>Y</update>
+        <update>N</update>
       </value>
       <value>
         <name>due_dt_pre</name>
@@ -630,7 +630,7 @@
       <schema_name/>
     </partitioning>
     <connection>Life21</connection>
-    <sql>SELECT r.&#x60;receipt_policy_id&#x60;,&#xd;&#xa;	r.&#x60;receipt_id&#x60;,&#xd;&#xa;	r.&#x60;receipt_seq&#x60;,&#xd;&#xa;	r.&#x60;due_date_pre&#x60;,&#xd;&#xa;	r.&#x60;receipt_source&#x60;,&#xd;&#xa;	r.&#x60;receipt_id&#x60;,&#xd;&#xa;	r.&#x60;receipt_date&#x60;,&#xd;&#xa;	r.&#x60;bank_acc_id&#x60;&#xd;&#xa;FROM &#x60;receipt&#x60; r&#xd;&#xa;INNER JOIN&#x28;&#xd;&#xa;	SELECT MAX&#x28;rc.&#x60;receipt_id&#x60;&#x29; AS receipt_id,rc.&#x60;receipt_policy_id&#x60;&#xd;&#xa;	FROM &#x60;receipt&#x60; rc&#xd;&#xa;	WHERE rc.&#x60;receipt_status&#x60;&#x3d;&#x27;A&#x27;&#xd;&#xa;	GROUP BY rc.&#x60;receipt_policy_id&#x60;&#xd;&#xa;	ORDER BY rc.&#x60;receipt_policy_id&#x60; ASC&#xd;&#xa;&#x29;rx ON rx.receipt_id&#x3d;r.&#x60;receipt_id&#x60;&#xd;&#xa;ORDER BY r.&#x60;receipt_policy_id&#x60;&#x3b;</sql>
+    <sql>SELECT r.&#x60;receipt_policy_id&#x60;,&#xd;&#xa;	r.&#x60;receipt_id&#x60;,&#xd;&#xa;	r.&#x60;receipt_seq&#x60;,&#xd;&#xa;	r.&#x60;due_date_pre&#x60;,&#xd;&#xa;	r.&#x60;receipt_source&#x60;,&#xd;&#xa;	r.&#x60;receipt_id&#x60;,&#xd;&#xa;	r.&#x60;receipt_date&#x60;,&#xd;&#xa;	r.&#x60;bank_acc_id&#x60;&#xd;&#xa;FROM &#x60;receipt&#x60; r&#xd;&#xa;INNER JOIN&#x28;&#xd;&#xa;	SELECT MAX&#x28;rc.&#x60;receipt_id&#x60;&#x29; AS receipt_id,rc.&#x60;receipt_policy_id&#x60;&#xd;&#xa;	FROM &#x60;receipt&#x60; rc&#xd;&#xa;	GROUP BY rc.&#x60;receipt_policy_id&#x60;&#xd;&#xa;	ORDER BY rc.&#x60;receipt_policy_id&#x60; ASC&#xd;&#xa;&#x29;rx ON rx.receipt_id&#x3d;r.&#x60;receipt_id&#x60;&#xd;&#xa;ORDER BY r.&#x60;receipt_policy_id&#x60;&#x3b;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

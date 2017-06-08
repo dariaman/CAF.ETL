@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>PolicyStaging</name>
+    <name>tes</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -498,121 +498,13 @@
   </connection>
   <order>
     <hop>
-      <from>Polis Life21</from>
-      <to>Insert &#x2f; Update Polis Billing</to>
+      <from>Data Polis Billing</from>
+      <to>Insert &#x2f; Update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Insert &#x2f; Update Polis Billing</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>JBSDB</connection>
-    <commit>1000</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>policy_billing</table>
-      <key>
-        <name>policy_id</name>
-        <field>policy_id</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>policy_Id</name>
-        <rename>policy_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>policy_no</name>
-        <rename>policy_no</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>cycleDate</name>
-        <rename>cycleDate</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>Policy_status</name>
-        <rename>Policy_status</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>payment_method</name>
-        <rename>policy_payment_method</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>commence_dt</name>
-        <rename>policy_commence_dt</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>due_dt</name>
-        <rename>policy_due_dt</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>product_id</name>
-        <rename>policy_product_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>holder_id</name>
-        <rename>policy_holder_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>regular_premium</name>
-        <rename>policy_regular_premium</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>premium_mode</name>
-        <rename>policy_premium_mode</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cashless_flag</name>
-        <rename>policy_cashless_flag</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cashless_fee_amount</name>
-        <rename>policy_cashless_fee</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>worksite_org_name</name>
-        <rename>worksite_org_name</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>Polis Life21</name>
+    <name>Data Polis Billing</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -623,7 +515,7 @@
       <schema_name/>
     </partitioning>
     <connection>Life21</connection>
-    <sql>SELECT &#xd;&#xa;	p.&#x60;policy_id&#x60;,&#xd;&#xa;	p.&#x60;policy_no&#x60;,&#xd;&#xa;	p.&#x60;policy_payment_method&#x60;,&#xd;&#xa;	p.policy_commence_dt,&#xd;&#xa;	p.policy_due_dt,&#xd;&#xa;	DATE_FORMAT&#x28;p.policy_commence_dt,&#x27;&#x25;e&#x27;&#x29; AS cycleDate,	&#xd;&#xa;	p.policy_product_id,&#xd;&#xa;	p.policy_holder_id,&#xd;&#xa;	p.policy_regular_premium,&#xd;&#xa;	p.Policy_status,&#xd;&#xa;	p.&#x60;policy_premium_mode&#x60;,&#xd;&#xa;	COALESCE&#x28;p.&#x60;policy_cashless_flag&#x60;,0&#x29; AS policy_cashless_flag,&#xd;&#xa;	CASE WHEN COALESCE&#x28;p.&#x60;policy_cashless_flag&#x60;,0&#x29;&#x3d;1 THEN COALESCE&#x28;p.&#x60;policy_cashless_fee&#x60;,0&#x29; ELSE 0 END AS policy_cashless_fee,&#xd;&#xa;	w.&#x60;worksite_org_name&#x60;&#xd;&#xa;FROM policy p&#xd;&#xa;LEFT JOIN &#x60;worksite&#x60; w ON w.&#x60;worksite_id&#x60;&#x3d;p.&#x60;policy_worksite_id&#x60;&#xd;&#xa;WHERE p.&#x60;policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;&#xd;&#xa;AND p.policy_premium_mode &#x3e; 0&#xd;&#xa;ORDER BY p.&#x60;policy_id&#x60;&#x3b;</sql>
+    <sql>SELECT &#x2a; FROM &#x60;product&#x60;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -637,8 +529,66 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>144</yloc>
+      <xloc>48</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>Insert &#x2f; Update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>JBSDB</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>product</table>
+      <key>
+        <name>product_id</name>
+        <field>product_id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>product_id</name>
+        <rename>product_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>product_code</name>
+        <rename>product_code</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>product_description</name>
+        <rename>product_description</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>auto_renewal</name>
+        <rename>auto_renewal</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
     </step>

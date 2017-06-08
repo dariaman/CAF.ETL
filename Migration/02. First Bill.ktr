@@ -408,7 +408,7 @@
       <offset>0.0</offset>
       <maxdiff>0.0</maxdiff>
     </maxdate>
-    <size_rowset>10000</size_rowset>
+    <size_rowset>5000</size_rowset>
     <sleep_time_empty>50</sleep_time_empty>
     <sleep_time_full>50</sleep_time_full>
     <unique_connections>N</unique_connections>
@@ -485,7 +485,7 @@
       <schema_name/>
     </partitioning>
     <connection>JBSDB</connection>
-    <sql>SELECT 1 AS bill_id,&#xd;&#xa;	pb.&#x60;policy_Id&#x60;,&#xd;&#xa;	pt.&#x60;recurring_seq&#x60; &#x2b;1 AS rec_seq,&#xd;&#xa;	DATE_ADD&#x28;pt.&#x60;due_dt_pre&#x60;,INTERVAL pb.premium_mode MONTH&#x29; due_dt_pre,&#xd;&#xa;	&#x27;R&#x27; billType,&#xd;&#xa;	pb.regular_premium,&#xd;&#xa;	pb.regular_premium AS total&#xd;&#xa;FROM &#x60;policy_billing&#x60; pb&#xd;&#xa;LEFT JOIN  &#x60;policy_last_trans&#x60; pt ON pb.&#x60;policy_Id&#x60;&#x3d;pt.&#x60;policy_Id&#x60;&#xd;&#xa;WHERE pb.&#x60;Policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;&#xd;&#xa;AND pt.&#x60;due_dt_pre&#x60; &#x3c; CURDATE&#x28;&#x29;</sql>
+    <sql>SELECT 1 AS bill_id,&#xd;&#xa;	pb.&#x60;policy_Id&#x60;,&#xd;&#xa;	pt.&#x60;recurring_seq&#x60; &#x2b;1 AS rec_seq,&#xd;&#xa;	DATE_ADD&#x28;pt.&#x60;due_dt_pre&#x60;,INTERVAL pb.premium_mode MONTH&#x29; due_dt_pre,&#xd;&#xa;	&#x27;R&#x27; billType,&#xd;&#xa;	pb.regular_premium,&#xd;&#xa;	pb.&#x60;cashless_fee_amount&#x60;,&#xd;&#xa;	&#x28;pb.regular_premium &#x2b; pb.&#x60;cashless_fee_amount&#x60;&#x29; AS total&#xd;&#xa;FROM &#x60;policy_billing&#x60; pb&#xd;&#xa;LEFT JOIN  &#x60;policy_last_trans&#x60; pt ON pb.&#x60;policy_Id&#x60;&#x3d;pt.&#x60;policy_Id&#x60;&#xd;&#xa;WHERE pb.&#x60;Policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;&#xd;&#xa;AND pt.&#x60;due_dt_pre&#x60; &#x3c; CURDATE&#x28;&#x29;&#xd;&#xa;AND DATE_ADD&#x28;pt.&#x60;due_dt_pre&#x60;,INTERVAL pb.premium_mode MONTH&#x29; &#x3c;&#x3d; pb.due_dt&#xd;&#xa;AND DATE_FORMAT&#x28;DATE_ADD&#x28;pt.&#x60;due_dt_pre&#x60;,INTERVAL pb.premium_mode MONTH&#x29;,&#x27;&#x25;Y&#x25;m&#x27;&#x29;&#x3c;&#x3d;DATE_FORMAT&#x28;CURDATE&#x28;&#x29;,&#x27;&#x25;Y&#x25;m&#x27;&#x29;&#x3b;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -499,8 +499,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>80</yloc>
+      <xloc>80</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -517,7 +517,7 @@
       <schema_name/>
     </partitioning>
     <connection>JBSDB</connection>
-    <commit>100</commit>
+    <commit>1000</commit>
     <update_bypassed>Y</update_bypassed>
     <lookup>
       <schema/>
@@ -559,6 +559,11 @@
         <update>Y</update>
       </value>
       <value>
+        <name>cashless_fee_amount</name>
+        <rename>cashless_fee_amount</rename>
+        <update>Y</update>
+      </value>
+      <value>
         <name>TotalAmount</name>
         <rename>total</rename>
         <update>Y</update>
@@ -572,8 +577,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>80</yloc>
+      <xloc>384</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
