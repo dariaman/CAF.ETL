@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>PolicyStaging</name>
+    <name>Billing Others</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -437,8 +437,8 @@
   <notepads>
   </notepads>
   <connection>
-    <name>JBS</name>
-    <server>192.168.1.18</server>
+    <name>JBSDB</name>
+    <server>192.168.30.18</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>jbsdb</database>
@@ -467,7 +467,7 @@
     </attributes>
   </connection>
   <connection>
-    <name>Life21Dev</name>
+    <name>Life21</name>
     <server>103.253.68.137</server>
     <type>MYSQL</type>
     <access>Native</access>
@@ -498,13 +498,13 @@
   </connection>
   <order>
     <hop>
-      <from>Data master polis</from>
-      <to>Insert &#x2f; Update</to>
+      <from>Data CC Transaction Billing Others</from>
+      <to>Insert Billing Other JBS</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Data master polis</name>
+    <name>Data CC Transaction Billing Others</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -514,8 +514,8 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Life21Dev</connection>
-    <sql>SELECT &#x2a;&#xd;&#xa;&#xd;&#xa;FROM policy p&#xd;&#xa;WHERE p.&#x60;policy_premium_mode&#x60; &#x3c;&#x3e; 0&#xd;&#xa;AND p.&#x60;policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;&#xd;&#xa;ORDER BY p.&#x60;policy_id&#x60;</sql>
+    <connection>Life21</connection>
+    <sql>SELECT pc.&#x60;policy_cc_tran_id&#x60;, pc.&#x60;policy_id&#x60;,pc.&#x60;description&#x60;,pc.&#x60;transaction_type&#x60;,pc.&#x60;total_amount&#x60;&#xd;&#xa;FROM &#x60;policy_cc_transaction&#x60; pc&#xd;&#xa;INNER JOIN &#x60;policy&#x60; p ON p.&#x60;policy_id&#x60;&#x3d;pc.&#x60;policy_id&#x60;&#xd;&#xa;WHERE transaction_type NOT IN &#x28;&#x27;I&#x27;,&#x27;R&#x27;&#x29; AND status_id&#x3d;1&#xd;&#xa;AND p.&#x60;policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -529,14 +529,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>128</yloc>
+      <xloc>144</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>Insert &#x2f; Update</name>
+    <name>Insert Billing Other JBS</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -546,97 +546,42 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>JBS</connection>
+    <connection>JBSDB</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema/>
-      <table>policy_billing</table>
+      <table>billing_others</table>
       <key>
-        <name>policy_id</name>
-        <field>policy_Id</field>
+        <name>policy_cc_tran_id</name>
+        <field>Life21TranID</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
-        <name>policy_premium_mode</name>
-        <rename>policy_premium_mode</rename>
-        <update>Y</update>
+        <name>Life21TranID</name>
+        <rename>policy_cc_tran_id</rename>
+        <update>N</update>
       </value>
       <value>
-        <name>policy_Id</name>
+        <name>policy_id</name>
         <rename>policy_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>policy_no</name>
-        <rename>policy_no</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>policy_payment_method</name>
-        <rename>policy_payment_method</rename>
+        <name>description</name>
+        <rename>description</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>policy_commence_dt</name>
-        <rename>policy_commence_dt</rename>
+        <name>BillingType</name>
+        <rename>transaction_type</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>policy_due_dt</name>
-        <rename>policy_due_dt</rename>
+        <name>TotalAmount</name>
+        <rename>total_amount</rename>
         <update>Y</update>
-      </value>
-      <value>
-        <name>policy_due_dt_pre</name>
-        <rename>policy_due_dt_pre</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_product_id</name>
-        <rename>policy_product_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_product_code</name>
-        <rename>product_code</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>holder_id</name>
-        <rename>policy_holder_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_regular_premium</name>
-        <rename>policy_regular_premium</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Policy_status</name>
-        <rename>Policy_status</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>HolderName</name>
-        <rename>customer_name</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>EmailHolder</name>
-        <rename>customer_email</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>VANo</name>
-        <rename>VA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>VAName</name>
-        <rename>customer_name</rename>
-        <update>N</update>
       </value>
     </lookup>
     <cluster_schema/>
@@ -647,8 +592,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>144</yloc>
+      <xloc>384</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
     </step>

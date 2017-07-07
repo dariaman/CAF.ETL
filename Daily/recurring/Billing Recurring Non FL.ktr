@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>PolicyStaging</name>
+    <name>Billing Recurring Non FL</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -435,10 +435,31 @@
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
+    <notepad>
+      <note>Amount Tidak di update</note>
+      <xloc>272</xloc>
+      <yloc>64</yloc>
+      <width>123</width>
+      <heigth>24</heigth>
+      <fontname>Tahoma</fontname>
+      <fontsize>8</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
-    <name>JBS</name>
-    <server>192.168.1.18</server>
+    <name>JBSDB</name>
+    <server>192.168.30.18</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>jbsdb</database>
@@ -467,7 +488,7 @@
     </attributes>
   </connection>
   <connection>
-    <name>Life21Dev</name>
+    <name>Life21</name>
     <server>103.253.68.137</server>
     <type>MYSQL</type>
     <access>Native</access>
@@ -498,13 +519,82 @@
   </connection>
   <order>
     <hop>
-      <from>Data master polis</from>
-      <to>Insert &#x2f; Update</to>
+      <from>Billing Recurring</from>
+      <to>Billing JBS</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Data master polis</name>
+    <name>Billing JBS</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>JBSDB</connection>
+    <commit>1000</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>billing</table>
+      <key>
+        <name>policy_id</name>
+        <field>policy_id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>recurring_seq</name>
+        <field>recurring_seq</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>policy_id</name>
+        <rename>policy_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>recurring_seq</name>
+        <rename>recurring_seq</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>due_dt_pre</name>
+        <rename>due_date_pre</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>TotalAmount</name>
+        <rename>total_amount</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>Life21TranID</name>
+        <rename>tranid</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>432</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>Billing Recurring</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -514,8 +604,8 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Life21Dev</connection>
-    <sql>SELECT &#x2a;&#xd;&#xa;&#xd;&#xa;FROM policy p&#xd;&#xa;WHERE p.&#x60;policy_premium_mode&#x60; &#x3c;&#x3e; 0&#xd;&#xa;AND p.&#x60;policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;&#xd;&#xa;ORDER BY p.&#x60;policy_id&#x60;</sql>
+    <connection>Life21</connection>
+    <sql>SELECT pc.&#x60;policy_cc_tran_id&#x60; AS tranid, pc.&#x60;policy_id&#x60;,pc.&#x60;recurring_seq&#x60;,pc.&#x60;due_date_pre&#x60;,pc.&#x60;total_amount&#x60;&#xd;&#xa;FROM &#x60;policy_cc_transaction&#x60; pc&#xd;&#xa;INNER JOIN &#x28;&#xd;&#xa;	SELECT MIN&#x28;pc.&#x60;policy_cc_tran_id&#x60;&#x29; policy_cc_tran_id&#xd;&#xa;	FROM &#x60;policy_cc_transaction&#x60; pc&#xd;&#xa;	INNER JOIN &#x60;policy&#x60; p ON p.&#x60;policy_id&#x60;&#x3d;pc.&#x60;policy_id&#x60;&#xd;&#xa;	WHERE pc.&#x60;status_id&#x60;&#x3d;1&#xd;&#xa;	AND p.&#x60;policy_product_id&#x60;&#x3c;&#x3e;1&#xd;&#xa;	AND pc.&#x60;transaction_type&#x60;&#x3d;&#x27;R&#x27;&#xd;&#xa;	AND p.&#x60;policy_status&#x60; IN &#x28;&#x27;Grace&#x27;,&#x27;Inforce&#x27;&#x29;&#xd;&#xa;	GROUP BY pc.&#x60;policy_id&#x60;,pc.&#x60;recurring_seq&#x60;&#xd;&#xa;&#x29;px ON pc.&#x60;policy_cc_tran_id&#x60;&#x3d;px.policy_cc_tran_id&#xd;&#xa;&#xd;&#xa;UNION ALL &#xd;&#xa;&#xd;&#xa;SELECT pc.&#x60;policy_ac_tran_id&#x60; AS tranid, pc.&#x60;policy_id&#x60;,pc.&#x60;recurring_seq&#x60;,pc.&#x60;due_date_pre&#x60;,pc.&#x60;total_amount&#x60;&#xd;&#xa;FROM &#x60;policy_ac_transaction&#x60; pc&#xd;&#xa;INNER JOIN &#x28;&#xd;&#xa;	SELECT MIN&#x28;pc.&#x60;policy_ac_tran_id&#x60;&#x29; policy_ac_tran_id&#xd;&#xa;	FROM &#x60;policy_ac_transaction&#x60; pc&#xd;&#xa;	INNER JOIN &#x60;policy&#x60; p ON p.&#x60;policy_id&#x60;&#x3d;pc.&#x60;policy_id&#x60;&#xd;&#xa;	WHERE pc.&#x60;status_id&#x60;&#x3d;1&#xd;&#xa;	AND p.&#x60;policy_product_id&#x60;&#x3c;&#x3e;1&#xd;&#xa;	AND pc.&#x60;transaction_type&#x60;&#x3d;&#x27;R&#x27;&#xd;&#xa;	AND p.&#x60;policy_status&#x60; IN &#x28;&#x27;Grace&#x27;,&#x27;Inforce&#x27;&#x29;&#xd;&#xa;	GROUP BY pc.&#x60;policy_id&#x60;,pc.&#x60;recurring_seq&#x60;&#xd;&#xa;&#x29;px ON pc.&#x60;policy_ac_tran_id&#x60;&#x3d;px.policy_ac_tran_id</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -529,126 +619,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>Insert &#x2f; Update</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>JBS</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>policy_billing</table>
-      <key>
-        <name>policy_id</name>
-        <field>policy_Id</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>policy_premium_mode</name>
-        <rename>policy_premium_mode</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_Id</name>
-        <rename>policy_id</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>policy_no</name>
-        <rename>policy_no</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_payment_method</name>
-        <rename>policy_payment_method</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_commence_dt</name>
-        <rename>policy_commence_dt</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_due_dt</name>
-        <rename>policy_due_dt</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_due_dt_pre</name>
-        <rename>policy_due_dt_pre</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_product_id</name>
-        <rename>policy_product_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_product_code</name>
-        <rename>product_code</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>holder_id</name>
-        <rename>policy_holder_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_regular_premium</name>
-        <rename>policy_regular_premium</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>Policy_status</name>
-        <rename>Policy_status</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>HolderName</name>
-        <rename>customer_name</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>EmailHolder</name>
-        <rename>customer_email</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>VANo</name>
-        <rename>VA</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>VAName</name>
-        <rename>customer_name</rename>
-        <update>N</update>
-      </value>
-    </lookup>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>320</xloc>
-      <yloc>144</yloc>
+      <xloc>160</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
     </step>

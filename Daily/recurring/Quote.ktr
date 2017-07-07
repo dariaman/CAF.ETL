@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>PolicyStaging</name>
+    <name>Quote</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -437,8 +437,8 @@
   <notepads>
   </notepads>
   <connection>
-    <name>JBS</name>
-    <server>192.168.1.18</server>
+    <name>JBSDB</name>
+    <server>192.168.30.18</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>jbsdb</database>
@@ -467,11 +467,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>Life21Dev</name>
+    <name>Life21-P</name>
     <server>103.253.68.137</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>prod_life21</database>
+    <database>prod_life21p</database>
     <port>3306</port>
     <username>dariaman</username>
     <password>Encrypted 2be98afc86af7b297b80efe62da96aec8</password>
@@ -498,13 +498,13 @@
   </connection>
   <order>
     <hop>
-      <from>Data master polis</from>
-      <to>Insert &#x2f; Update</to>
+      <from>Data Quote</from>
+      <to>Insert &#x2f; Update Quote JBS</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Data master polis</name>
+    <name>Data Quote</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -514,8 +514,8 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>Life21Dev</connection>
-    <sql>SELECT &#x2a;&#xd;&#xa;&#xd;&#xa;FROM policy p&#xd;&#xa;WHERE p.&#x60;policy_premium_mode&#x60; &#x3c;&#x3e; 0&#xd;&#xa;AND p.&#x60;policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;&#xd;&#xa;ORDER BY p.&#x60;policy_id&#x60;</sql>
+    <connection>Life21-P</connection>
+    <sql>SELECT pf.&#x60;prospect_cc_exp&#x60;,q.&#x60;quote_id&#x60;,q.&#x60;quote_ref_no&#x60;,q.&#x60;quote_holder_id&#x60;,p.&#x60;prospect_name&#x60;, pf.&#x60;prospect_product_id&#x60;,&#xd;&#xa;pf.&#x60;prospect_amount&#x60;,pf.&#x60;prospect_cashless_fee&#x60;,pf.&#x60;prospect_paper_print_fee&#x60;,&#xd;&#xa;&#x28;pf.&#x60;prospect_amount&#x60;&#x2b;pf.&#x60;prospect_cashless_fee&#x60;&#x2b;pf.&#x60;prospect_paper_print_fee&#x60;&#x29; AS total,&#xd;&#xa;pf.&#x60;prospect_cc_no&#x60;,pf.&#x60;prospect_cc_name&#x60;,q.&#x60;quote_policy_id&#x60;&#xd;&#xa;FROM prospect_billing pf&#xd;&#xa;INNER JOIN &#x60;quote&#x60; q ON q.&#x60;quote_id&#x60;&#x3d;pf.&#x60;quote_id&#x60;&#xd;&#xa;INNER JOIN  &#x60;prospect&#x60; p ON p.&#x60;prospect_id&#x60;&#x3d;q.&#x60;quote_holder_id&#x60;&#xd;&#xa;WHERE pf.&#x60;prospect_convert_flag&#x60;&#x3d;0</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -529,14 +529,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>128</yloc>
+      <xloc>96</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>Insert &#x2f; Update</name>
+    <name>Insert &#x2f; Update Quote JBS</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -546,97 +546,82 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>JBS</connection>
+    <connection>JBSDB</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema/>
-      <table>policy_billing</table>
+      <table>quote_billing</table>
       <key>
-        <name>policy_id</name>
-        <field>policy_Id</field>
+        <name>quote_id</name>
+        <field>quote_id</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
-        <name>policy_premium_mode</name>
-        <rename>policy_premium_mode</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_Id</name>
-        <rename>policy_id</rename>
+        <name>quote_id</name>
+        <rename>quote_id</rename>
         <update>N</update>
       </value>
       <value>
-        <name>policy_no</name>
-        <rename>policy_no</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_payment_method</name>
-        <rename>policy_payment_method</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_commence_dt</name>
-        <rename>policy_commence_dt</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_due_dt</name>
-        <rename>policy_due_dt</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_due_dt_pre</name>
-        <rename>policy_due_dt_pre</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_product_id</name>
-        <rename>policy_product_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_product_code</name>
-        <rename>product_code</rename>
+        <name>ref_no</name>
+        <rename>quote_ref_no</rename>
         <update>Y</update>
       </value>
       <value>
         <name>holder_id</name>
-        <rename>policy_holder_id</rename>
+        <rename>quote_holder_id</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>policy_regular_premium</name>
-        <rename>policy_regular_premium</rename>
+        <name>product_id</name>
+        <rename>prospect_product_id</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>Policy_status</name>
-        <rename>Policy_status</rename>
+        <name>prospect_amount</name>
+        <rename>prospect_amount</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>HolderName</name>
-        <rename>customer_name</rename>
+        <name>cashless_fee</name>
+        <rename>prospect_cashless_fee</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>EmailHolder</name>
-        <rename>customer_email</rename>
+        <name>paper_print_fee</name>
+        <rename>prospect_paper_print_fee</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>VANo</name>
-        <rename>VA</rename>
+        <name>acc_no</name>
+        <rename>prospect_cc_no</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>VAName</name>
-        <rename>customer_name</rename>
-        <update>N</update>
+        <name>acc_name</name>
+        <rename>prospect_cc_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cc_expiry</name>
+        <rename>prospect_cc_exp</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>Holder_Name</name>
+        <rename>prospect_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>TotalAmount</name>
+        <rename>total</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>policy_id</name>
+        <rename>quote_policy_id</rename>
+        <update>Y</update>
       </value>
     </lookup>
     <cluster_schema/>
@@ -647,8 +632,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
-      <yloc>144</yloc>
+      <xloc>352</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
