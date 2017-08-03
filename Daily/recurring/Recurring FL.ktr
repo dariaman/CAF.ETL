@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>PolicyCC</name>
+    <name>Recurring FL</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -435,10 +435,31 @@
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
+    <notepad>
+      <note>Recurring untuk Product Non Flexy Link dan yang tidak AutoRenewal</note>
+      <xloc>48</xloc>
+      <yloc>48</yloc>
+      <width>340</width>
+      <heigth>24</heigth>
+      <fontname>Tahoma</fontname>
+      <fontsize>8</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
     <name>JBSDB</name>
-    <server>192.168.1.18</server>
+    <server>192.168.30.18</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>jbsdb</database>
@@ -466,55 +487,47 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
-  <connection>
-    <name>Life21</name>
-    <server>103.253.68.137</server>
-    <type>MYSQL</type>
-    <access>Native</access>
-    <database>prod_life21</database>
-    <port>3306</port>
-    <username>dariaman</username>
-    <password>Encrypted 2be98afc86af7b297b80efe62da96aec8</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.rewriteBatchedStatements</code><attribute>true</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCompression</code><attribute>true</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useServerPrepStmts</code><attribute>false</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
   <order>
     <hop>
-      <from>Polis Billing CC</from>
-      <to>Merge Join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Polis CC Life21</from>
-      <to>Merge Join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge Join</from>
-      <to>Insert &#x2f; Update Polis CC Billing</to>
+      <from>Cek Polis for Recurring</from>
+      <to>Insert billing</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Insert &#x2f; Update Polis CC Billing</name>
+    <name>Cek Polis for Recurring</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>JBSDB</connection>
+    <sql>SELECT 1 AS bill_id,&#xd;&#xa;	pb.&#x60;policy_Id&#x60;,&#xd;&#xa;	COALESCE&#x28;b.&#x60;recurring_seq&#x60;,pt.&#x60;recurring_seq&#x60;,0&#x29; &#x2b;1 AS rec_seq,&#xd;&#xa;	DATE_ADD&#x28;COALESCE&#x28;b.&#x60;due_dt_pre&#x60;,pt.&#x60;due_dt_pre&#x60;,pb.&#x60;commence_dt&#x60;&#x29;, INTERVAL pb.premium_mode MONTH&#x29; AS due_dt_pre,&#xd;&#xa;	pb.&#x60;regular_premium&#x60;,&#xd;&#xa;	pb.&#x60;cashless_fee_amount&#x60;,&#xd;&#xa;	pb.&#x60;regular_premium&#x60;&#x2b;pb.&#x60;cashless_fee_amount&#x60; AS total,&#xd;&#xa;	b.&#x60;BillingDate&#x60;,&#xd;&#xa;	LAST_DAY&#x28;NOW&#x28;&#x29;&#x29;&#xd;&#xa;FROM &#x60;policy_billing&#x60; pb&#xd;&#xa;INNER JOIN &#x60;product&#x60; pd ON pd.&#x60;product_id&#x60;&#x3d;pb.&#x60;product_id&#x60;&#xd;&#xa;LEFT JOIN &#x60;billing&#x60; b ON pb.&#x60;policy_Id&#x60;&#x3d;b.&#x60;policy_id&#x60; AND COALESCE&#x28;b.&#x60;BillingDate&#x60;,NOW&#x28;&#x29;&#x29;&#x3c;&#x3d;LAST_DAY&#x28;NOW&#x28;&#x29;&#x29; AND b.&#x60;IsClosed&#x60;&#x3d;0&#xd;&#xa;LEFT JOIN &#x60;policy_last_trans&#x60; pt ON pt.policy_Id&#x3d;pb.policy_Id&#xd;&#xa;WHERE pb.&#x60;Policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29; AND pb.&#x60;product_id&#x60;&#x3d;1&#xd;&#xa;AND b.&#x60;BillingID&#x60; IS NULL&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+    </step>
+
+  <step>
+    <name>Insert billing</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -525,45 +538,56 @@
       <schema_name/>
     </partitioning>
     <connection>JBSDB</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
+    <commit>500</commit>
+    <update_bypassed>Y</update_bypassed>
     <lookup>
       <schema/>
-      <table>policy_cc</table>
+      <table>billing</table>
       <key>
-        <name>policy_id</name>
-        <field>PolicyId</field>
+        <name>policy_Id</name>
+        <field>policy_id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>rec_seq</name>
+        <field>recurring_seq</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
-        <name>PolicyId</name>
-        <rename>policy_id</rename>
+        <name>policy_id</name>
+        <rename>policy_Id</rename>
         <update>N</update>
       </value>
       <value>
-        <name>cc_no</name>
-        <rename>cc_no</rename>
+        <name>recurring_seq</name>
+        <rename>rec_seq</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>due_dt_pre</name>
+        <rename>due_dt_pre</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>cc_name</name>
-        <rename>cc_name</rename>
+        <name>policy_regular_premium</name>
+        <rename>regular_premium</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>cc_expiry</name>
-        <rename>cc_expiry</rename>
+        <name>TotalAmount</name>
+        <rename>total</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>cc_address</name>
-        <rename>alamat</rename>
+        <name>BillingID</name>
+        <rename>bill_id</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>cc_telephone</name>
-        <rename>telephone</rename>
+        <name>cashless_fee_amount</name>
+        <rename>cashless_fee_amount</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -575,105 +599,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>480</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>Merge Join</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-<join_type>INNER</join_type>
-<step1>Polis Billing CC</step1>
-<step2>Polis CC Life21</step2>
-    <keys_1>
-      <key>policy_id</key>
-    </keys_1>
-    <keys_2>
-      <key>policy_id</key>
-    </keys_2>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>240</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>Polis Billing CC</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>JBSDB</connection>
-    <sql>SELECT pb.&#x60;policy_id&#x60;&#xd;&#xa;FROM &#x60;policy_billing&#x60; pb&#xd;&#xa;WHERE pb.&#x60;payment_method&#x60;&#x3d;&#x27;CC&#x27;&#xd;&#xa;AND pb.&#x60;Policy_status&#x60; IN &#x28;&#x27;Grace&#x27;,&#x27;Inforce&#x27;&#x29;&#xd;&#xa;ORDER BY pb.&#x60;policy_Id&#x60;&#x3b;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>32</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>Polis CC Life21</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>Life21</connection>
-    <sql>SELECT pc.&#x60;policy_id&#x60;,&#xd;&#xa;	pc.&#x60;cc_no&#x60;,&#xd;&#xa;	pc.&#x60;cc_name&#x60;,&#xd;&#xa;	pc.&#x60;cc_expiry&#x60;,&#xd;&#xa;	NULLIF&#x28;TRIM&#x28;pc.&#x60;cc_address&#x60;&#x29;,&#x27;&#x27;&#x29; AS alamat,&#xd;&#xa;	NULLIF&#x28;TRIM&#x28;pc.cc_telephone&#x29;,&#x27;&#x27;&#x29; AS telephone&#xd;&#xa;FROM &#x60;policy_cc&#x60; pc &#xd;&#xa;WHERE pc.&#x60;status&#x60;&#x3d;1&#xd;&#xa;ORDER BY pc.&#x60;policy_Id&#x60;&#x3b;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
+      <xloc>368</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>

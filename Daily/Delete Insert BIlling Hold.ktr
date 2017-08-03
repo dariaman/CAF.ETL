@@ -438,7 +438,7 @@
   </notepads>
   <connection>
     <name>JBSDB</name>
-    <server>192.168.1.18</server>
+    <server>192.168.30.18</server>
     <type>MYSQL</type>
     <access>Native</access>
     <database>jbsdb</database>
@@ -484,7 +484,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>INSERT INTO &#x60;billinghold_history&#x60;&#xd;&#xa;SELECT b.&#x2a; &#xd;&#xa;FROM &#x60;billinghold&#x60; b&#xd;&#xa;WHERE b.&#x60;ReleaseDate&#x60;&#x3d;CURDATE&#x28;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;DELETE FROM &#x60;billinghold&#x60; &#xd;&#xa;WHERE &#x60;ReleaseDate&#x60;&#x3d;CURDATE&#x28;&#x29;&#x3b;</sql>
+    <sql>INSERT INTO &#x60;billinghold_history&#x60;&#xd;&#xa;SELECT b.&#x2a; &#xd;&#xa;FROM &#x60;billinghold&#x60; b&#xd;&#xa;WHERE b.&#x60;ReleaseDate&#x60;&#x3c;&#x3d;CURDATE&#x28;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;DELETE FROM &#x60;billinghold&#x60; &#xd;&#xa;WHERE &#x60;ReleaseDate&#x60;&#x3c;&#x3d;CURDATE&#x28;&#x29;&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>

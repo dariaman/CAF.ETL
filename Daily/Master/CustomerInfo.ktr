@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>First Bill</name>
+    <name>CustomerInfo</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -408,7 +408,7 @@
       <offset>0.0</offset>
       <maxdiff>0.0</maxdiff>
     </maxdate>
-    <size_rowset>5000</size_rowset>
+    <size_rowset>10000</size_rowset>
     <sleep_time_empty>50</sleep_time_empty>
     <sleep_time_full>50</sleep_time_full>
     <unique_connections>N</unique_connections>
@@ -466,15 +466,45 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>Life21</name>
+    <server>103.253.68.137</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>prod_life21</database>
+    <port>3306</port>
+    <username>dariaman</username>
+    <password>Encrypted 2be98afc86af7b297b80efe62da96aec8</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.rewriteBatchedStatements</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCompression</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useServerPrepStmts</code><attribute>false</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
     <hop>
-      <from>Data Bill</from>
-      <to>Insert &#x2f; Update</to>
+      <from>Data Customer Life21</from>
+      <to>Insert &#x2f; Update CustomerInfo</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Data Bill</name>
+    <name>Data Customer Life21</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -484,8 +514,8 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>JBSDB</connection>
-    <sql>SELECT 1 AS bill_id,&#xd;&#xa;	pb.&#x60;policy_Id&#x60;,&#xd;&#xa;	pt.&#x60;recurring_seq&#x60; &#x2b;1 AS rec_seq,&#xd;&#xa;	DATE_ADD&#x28;pt.&#x60;due_dt_pre&#x60;,INTERVAL pb.premium_mode MONTH&#x29; due_dt_pre,&#xd;&#xa;	&#x27;R&#x27; billType,&#xd;&#xa;	pb.regular_premium,&#xd;&#xa;	pb.&#x60;cashless_fee_amount&#x60;,&#xd;&#xa;	&#x28;pb.regular_premium &#x2b; pb.&#x60;cashless_fee_amount&#x60;&#x29; AS total&#xd;&#xa;FROM &#x60;policy_billing&#x60; pb&#xd;&#xa;LEFT JOIN  &#x60;policy_last_trans&#x60; pt ON pb.&#x60;policy_Id&#x60;&#x3d;pt.&#x60;policy_Id&#x60;&#xd;&#xa;WHERE pb.&#x60;Policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;&#xd;&#xa;AND pt.&#x60;due_dt_pre&#x60; &#x3c; CURDATE&#x28;&#x29;&#xd;&#xa;AND DATE_ADD&#x28;pt.&#x60;due_dt_pre&#x60;,INTERVAL pb.premium_mode MONTH&#x29; &#x3c;&#x3d; pb.due_dt&#xd;&#xa;AND DATE_FORMAT&#x28;DATE_ADD&#x28;pt.&#x60;due_dt_pre&#x60;,INTERVAL pb.premium_mode MONTH&#x29;,&#x27;&#x25;Y&#x25;m&#x27;&#x29;&#x3c;&#x3d;DATE_FORMAT&#x28;CURDATE&#x28;&#x29;,&#x27;&#x25;Y&#x25;m&#x27;&#x29;&#x3b;</sql>
+    <connection>Life21</connection>
+    <sql>SELECT p.policy_holder_id,&#xd;&#xa;	c.&#x60;customer_name&#x60;,&#xd;&#xa;	c.&#x60;customer_dob&#x60;,&#xd;&#xa;	c.&#x60;customer_mobile_phone&#x60;,&#xd;&#xa;	c.&#x60;customer_email&#x60;&#xd;&#xa;FROM policy p&#xd;&#xa;INNER JOIN &#x60;customer&#x60; c ON c.&#x60;customer_id&#x60;&#x3d;p.&#x60;policy_holder_id&#x60;&#xd;&#xa;WHERE p.&#x60;policy_status&#x60; IN &#x28;&#x27;Inforce&#x27;,&#x27;Grace&#x27;&#x29;&#xd;&#xa;ORDER BY c.&#x60;customer_id&#x60;&#x3b;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -499,14 +529,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>192</xloc>
-      <yloc>224</yloc>
+      <xloc>112</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>Insert &#x2f; Update</name>
+    <name>Insert &#x2f; Update CustomerInfo</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -518,54 +548,39 @@
     </partitioning>
     <connection>JBSDB</connection>
     <commit>1000</commit>
-    <update_bypassed>Y</update_bypassed>
+    <update_bypassed>N</update_bypassed>
     <lookup>
       <schema/>
-      <table>billing</table>
+      <table>customer_info</table>
       <key>
-        <name>bill_id</name>
-        <field>BillingID</field>
+        <name>policy_holder_id</name>
+        <field>CustomerId</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
-        <name>policy_id</name>
-        <rename>policy_Id</rename>
+        <name>CustomerId</name>
+        <rename>policy_holder_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>CustomerName</name>
+        <rename>customer_name</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>BillingID</name>
-        <rename>bill_id</rename>
+        <name>dob</name>
+        <rename>customer_dob</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>recurring_seq</name>
-        <rename>rec_seq</rename>
+        <name>Phone</name>
+        <rename>customer_mobile_phone</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>due_dt_pre</name>
-        <rename>due_dt_pre</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>BillingType</name>
-        <rename>billType</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>policy_regular_premium</name>
-        <rename>regular_premium</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cashless_fee_amount</name>
-        <rename>cashless_fee_amount</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>TotalAmount</name>
-        <rename>total</rename>
+        <name>Email</name>
+        <rename>customer_email</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -577,8 +592,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>224</yloc>
+      <xloc>336</xloc>
+      <yloc>80</yloc>
       <draw>Y</draw>
     </GUI>
     </step>

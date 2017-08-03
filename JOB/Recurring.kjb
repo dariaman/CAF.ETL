@@ -382,7 +382,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;Users&#x5c;dariaman.siagian&#x5c;Documents&#x5c;CAF&#x5c;CAF.ETL&#x5c;Daily&#x5c;recurring&#x5c;Billing Recurring Non FL.ktr</filename>
+      <filename>C&#x3a;&#x5c;Users&#x5c;dariaman.siagian&#x5c;Documents&#x5c;CAF&#x5c;CAF.ETL&#x5c;Daily&#x5c;recurring&#x5c;Recurring Non FL.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -417,7 +417,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;Users&#x5c;dariaman.siagian&#x5c;Documents&#x5c;CAF&#x5c;CAF.ETL&#x5c;Daily&#x5c;recurring&#x5c;Billing Recurring FL.ktr</filename>
+      <filename>C&#x3a;&#x5c;Users&#x5c;dariaman.siagian&#x5c;Documents&#x5c;CAF&#x5c;CAF.ETL&#x5c;Daily&#x5c;recurring&#x5c;Recurring FL.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
