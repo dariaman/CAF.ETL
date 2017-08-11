@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Billing Hold</name>
+    <name>Update Premium Renewal</name>
     <description />
     <extended_description />
     <trans_version />
@@ -529,13 +529,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>INSERT INTO `billinghold_history`
-SELECT b.* 
-FROM `billinghold` b
-WHERE b.`ReleaseDate`&lt;=CURDATE();
-
-DELETE FROM `billinghold` 
-WHERE `ReleaseDate`&lt;=CURDATE();</sql>
+    <sql>CALL `SycnDataBill`();</sql>
     <set_params>N</set_params>
     <insert_field />
     <update_field />

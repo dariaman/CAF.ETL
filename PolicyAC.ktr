@@ -2,22 +2,22 @@
 <transformation>
   <info>
     <name>PolicyAC</name>
-    <description/>
-    <extended_description/>
-    <trans_version/>
+    <description />
+    <extended_description />
+    <trans_version />
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
-    <directory>&#x2f;</directory>
+    <directory>/</directory>
     <parameters>
     </parameters>
     <log>
       <trans-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <size_limit_lines/>
-        <interval/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <size_limit_lines />
+        <interval />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -42,37 +42,37 @@
           <id>LINES_READ</id>
           <enabled>Y</enabled>
           <name>LINES_READ</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_WRITTEN</id>
           <enabled>Y</enabled>
           <name>LINES_WRITTEN</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_UPDATED</id>
           <enabled>Y</enabled>
           <name>LINES_UPDATED</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_INPUT</id>
           <enabled>Y</enabled>
           <name>LINES_INPUT</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_OUTPUT</id>
           <enabled>Y</enabled>
           <name>LINES_OUTPUT</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>LINES_REJECTED</id>
           <enabled>Y</enabled>
           <name>LINES_REJECTED</name>
-          <subject/>
+          <subject />
         </field>
         <field>
           <id>ERRORS</id>
@@ -126,11 +126,11 @@
         </field>
       </trans-log-table>
       <perf-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <interval/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <interval />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -208,10 +208,10 @@
         </field>
       </perf-log-table>
       <channel-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -274,10 +274,10 @@
         </field>
       </channel-log-table>
       <step-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -350,10 +350,10 @@
         </field>
       </step-log-table>
       <metrics-log-table>
-        <connection/>
-        <schema/>
-        <table/>
-        <timeout_days/>
+        <connection />
+        <schema />
+        <table />
+        <timeout_days />
         <field>
           <id>ID_BATCH</id>
           <enabled>Y</enabled>
@@ -402,9 +402,9 @@
       </metrics-log-table>
     </log>
     <maxdate>
-      <connection/>
-      <table/>
-      <field/>
+      <connection />
+      <table />
+      <field />
       <offset>0.0</offset>
       <maxdiff>0.0</maxdiff>
     </maxdate>
@@ -413,9 +413,9 @@
     <sleep_time_full>50</sleep_time_full>
     <unique_connections>N</unique_connections>
     <feedback_shown>Y</feedback_shown>
-    <feedback_size>50000</feedback_size>
+    <feedback_size>5000</feedback_size>
     <using_thread_priorities>Y</using_thread_priorities>
-    <shared_objects_file/>
+    <shared_objects_file />
     <capture_step_performance>N</capture_step_performance>
     <step_performance_capturing_delay>1000</step_performance_capturing_delay>
     <step_performance_capturing_size_limit>500</step_performance_capturing_size_limit>
@@ -428,110 +428,202 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2017&#x2f;03&#x2f;21 11&#x3a;11&#x3a;10.994</created_date>
+    <created_date>2017/03/21 11:11:10.994</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2017&#x2f;03&#x2f;21 11&#x3a;11&#x3a;10.994</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
+    <modified_date>2017/03/21 11:11:10.994</modified_date>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>JBS</name>
-    <server>192.168.1.16</server>
+    <name>Life21Dev2</name>
+    <server>192.168.30.18</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>jbsdb</database>
+    <database>prod_life21p</database>
     <port>3306</port>
-    <username>life21dev</username>
-    <password>Encrypted 2be98afc86aa7f2e4aa48bd22dac1a98e</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
+    <username>dariaman</username>
+    <password>Encrypted 2be98afc86aa7f2e49b39bd63c9c2bdde</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
     <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.rewriteBatchedStatements</code><attribute>true</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCompression</code><attribute>true</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useServerPrepStmts</code><attribute>false</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.defaultFetchSize</code>
+        <attribute>500</attribute>
+      </attribute>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.rewriteBatchedStatements</code>
+        <attribute>true</attribute>
+      </attribute>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.useCompression</code>
+        <attribute>true</attribute>
+      </attribute>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.useCursorFetch</code>
+        <attribute>true</attribute>
+      </attribute>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.useServerPrepStmts</code>
+        <attribute>false</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>3306</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
     </attributes>
   </connection>
   <connection>
-    <name>Life21Dev</name>
-    <server>192.168.1.16</server>
+    <name>Life21prod</name>
+    <server>103.253.68.137</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>backup_prod_life21_10032017</database>
+    <database>prod_life21p</database>
     <port>3306</port>
-    <username>life21dev</username>
-    <password>Encrypted 2be98afc86aa7f2e4aa48bd22dac1a98e</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
+    <username>dariaman</username>
+    <password>Encrypted 2be98afc86af7b297b80efe62da96aec8</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
     <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.rewriteBatchedStatements</code><attribute>true</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCompression</code><attribute>true</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useServerPrepStmts</code><attribute>false</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.defaultFetchSize</code>
+        <attribute>500</attribute>
+      </attribute>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.rewriteBatchedStatements</code>
+        <attribute>true</attribute>
+      </attribute>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.useCompression</code>
+        <attribute>true</attribute>
+      </attribute>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.useCursorFetch</code>
+        <attribute>true</attribute>
+      </attribute>
+      <attribute>
+        <code>EXTRA_OPTION_MYSQL.useServerPrepStmts</code>
+        <attribute>false</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>3306</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
     </attributes>
   </connection>
   <order>
     <hop>
-      <from>Data AC Aktif</from>
-      <to>Merge Join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Policy Billing AC</from>
-      <to>Merge Join</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge Join</from>
+      <from>Quote</from>
       <to>Update Data AC</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>prospek</from>
+      <to>Update Data AC 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>quote_coverage</from>
+      <to>Update Data AC 2 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Data AC Aktif</name>
+    <name>Quote</name>
     <type>TableInput</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>Life21Dev</connection>
-    <sql>SELECT DISTINCT pa.&#x60;policy_id&#x60;,&#xd;&#xa;	pa.&#x60;acc_no&#x60;,&#xd;&#xa;	pa.&#x60;acc_name&#x60;,&#xd;&#xa;	pa.&#x60;bank_id&#x60;,&#xd;&#xa;	NULLIF&#x28;TRIM&#x28;pa.&#x60;bank_branch&#x60;&#x29;,&#x27;&#x27;&#x29; bank_branch&#xd;&#xa;FROM &#x60;policy_ac&#x60; pa &#xd;&#xa;WHERE pa.status&#x3d;1&#xd;&#xa;order by pa.&#x60;policy_id&#x60;</sql>
+    <connection>Life21prod</connection>
+    <sql>SELECT * FROM `quote` q
+ORDER BY q.`quote_id` DESC
+LIMIT 10000</sql>
     <limit>0</limit>
-    <lookup/>
+    <lookup />
     <execute_each_row>N</execute_each_row>
     <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema/>
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -539,128 +631,256 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>128</xloc>
-      <yloc>32</yloc>
+      <xloc>144</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
-    </step>
-
-  <step>
-    <name>Merge Join</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-<join_type>INNER</join_type>
-<step1>Policy Billing AC</step1>
-<step2>Data AC Aktif</step2>
-    <keys_1>
-      <key>policy_Id</key>
-    </keys_1>
-    <keys_2>
-      <key>policy_id</key>
-    </keys_2>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>304</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>Policy Billing AC</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>JBS</connection>
-    <sql>SELECT &#x60;policy_Id&#x60; FROM &#x60;policy_billing&#x60; &#xd;&#xa;WHERE &#x60;policy_payment_method&#x60;&#x3d;&#x27;AC&#x27;&#xd;&#xa;order by &#x60;policy_id&#x60;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
+  </step>
   <step>
     <name>Update Data AC</name>
     <type>InsertUpdate</type>
-    <description/>
+    <description />
     <distribute>Y</distribute>
-    <custom_distribution/>
+    <custom_distribution />
     <copies>1</copies>
     <partitioning>
       <method>none</method>
-      <schema_name/>
+      <schema_name />
     </partitioning>
-    <connection>JBS</connection>
-    <commit>100</commit>
+    <connection>Life21Dev2</connection>
+    <commit>5000</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema/>
-      <table>policy_billing</table>
+      <schema />
+      <table>quote</table>
       <key>
-        <name>policy_id</name>
-        <field>policy_Id</field>
-        <condition>&#x3d;</condition>
-        <name2/>
+        <name>quote_id</name>
+        <field>quote_id</field>
+        <condition>=</condition>
+        <name2 />
       </key>
       <value>
-        <name>policy_Id</name>
-        <rename>policy_id</rename>
+        <name>quote_id</name>
+        <rename>quote_id</rename>
         <update>N</update>
       </value>
       <value>
-        <name>acc_no</name>
-        <rename>acc_no</rename>
+        <name>quote_ref_no</name>
+        <rename>quote_ref_no</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>acc_name</name>
-        <rename>acc_name</rename>
+        <name>quote_holder_id</name>
+        <rename>quote_holder_id</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>acc_bank_id</name>
-        <rename>bank_id</rename>
+        <name>quote_prospect_id</name>
+        <rename>quote_prospect_id</rename>
         <update>Y</update>
       </value>
       <value>
-        <name>acc_bank_branch</name>
-        <rename>bank_branch</rename>
+        <name>quote_age</name>
+        <rename>quote_age</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_primary_fund_type_id</name>
+        <rename>quote_primary_fund_type_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_premium_mode</name>
+        <rename>quote_premium_mode</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_premium_lifespan</name>
+        <rename>quote_premium_lifespan</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_duration</name>
+        <rename>quote_duration</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_duration_days</name>
+        <rename>quote_duration_days</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_premium_duration</name>
+        <rename>quote_premium_duration</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_premium_months</name>
+        <rename>quote_premium_months</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_desc</name>
+        <rename>quote_desc</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_admin</name>
+        <rename>quote_admin</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_initial_fee</name>
+        <rename>quote_initial_fee</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_regular_fee</name>
+        <rename>quote_regular_fee</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_stamp_fee</name>
+        <rename>quote_stamp_fee</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_single_premium</name>
+        <rename>quote_single_premium</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_regular_premium</name>
+        <rename>quote_regular_premium</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_created_dt</name>
+        <rename>quote_created_dt</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_status</name>
+        <rename>quote_status</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_worksite_id</name>
+        <rename>quote_worksite_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_agent_id</name>
+        <rename>quote_agent_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_pdf</name>
+        <rename>quote_pdf</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_pdf_form</name>
+        <rename>quote_pdf_form</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_pdf_doc</name>
+        <rename>quote_pdf_doc</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_key</name>
+        <rename>quote_key</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_policy_id</name>
+        <rename>quote_policy_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_submitted_dt</name>
+        <rename>quote_submitted_dt</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_main_coverage_id</name>
+        <rename>quote_main_coverage_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_premium_leave_year</name>
+        <rename>quote_premium_leave_year</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_product_id</name>
+        <rename>quote_product_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_signed_dt</name>
+        <rename>quote_signed_dt</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_paid_dt</name>
+        <rename>quote_paid_dt</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_converted_dt</name>
+        <rename>quote_converted_dt</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_reference_id</name>
+        <rename>quote_reference_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_reference</name>
+        <rename>quote_reference</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_paper_print_flag</name>
+        <rename>quote_paper_print_flag</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_paper_print_fee</name>
+        <rename>quote_paper_print_fee</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_convenience_fee</name>
+        <rename>quote_convenience_fee</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_payment_method</name>
+        <rename>quote_payment_method</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_success</name>
+        <rename>quote_success</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_cashless_flag</name>
+        <rename>quote_cashless_flag</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_cashless_fee</name>
+        <rename>quote_cashless_fee</rename>
         <update>Y</update>
       </value>
     </lookup>
-    <cluster_schema/>
+    <cluster_schema />
     <remotesteps>
       <input>
       </input>
@@ -668,12 +888,441 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
-      <yloc>96</yloc>
+      <xloc>512</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
-    </step>
-
+  </step>
+  <step>
+    <name>prospek</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>Life21prod</connection>
+    <sql>SELECT * FROM `prospect` p
+ORDER BY p.`prospect_id` DESC
+LIMIT 10000</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>160</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Update Data AC 2</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>Life21Dev2</connection>
+    <commit>5000</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>prospect</table>
+      <key>
+        <name>prospect_id</name>
+        <field>prospect_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>prospect_id</name>
+        <rename>prospect_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>prospect_name</name>
+        <rename>prospect_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_nric</name>
+        <rename>prospect_nric</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_id_type</name>
+        <rename>prospect_id_type</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_dob</name>
+        <rename>prospect_dob</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_birth_place</name>
+        <rename>prospect_birth_place</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_gender</name>
+        <rename>prospect_gender</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_mobile_phone</name>
+        <rename>prospect_mobile_phone</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_work_phone</name>
+        <rename>prospect_work_phone</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_email</name>
+        <rename>prospect_email</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_password</name>
+        <rename>prospect_password</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_address</name>
+        <rename>prospect_address</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_city</name>
+        <rename>prospect_city</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_postal_code</name>
+        <rename>prospect_postal_code</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_region_id</name>
+        <rename>prospect_region_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_phone</name>
+        <rename>prospect_phone</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_address_cor</name>
+        <rename>prospect_address_cor</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_city_cor</name>
+        <rename>prospect_city_cor</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_postal_code_cor</name>
+        <rename>prospect_postal_code_cor</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_region_cor_id</name>
+        <rename>prospect_region_cor_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_phone_cor</name>
+        <rename>prospect_phone_cor</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_bank_account</name>
+        <rename>prospect_bank_account</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_account_name</name>
+        <rename>prospect_account_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_bank_name</name>
+        <rename>prospect_bank_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_bank_branch</name>
+        <rename>prospect_bank_branch</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_bank_account_status</name>
+        <rename>prospect_bank_account_status</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_tax_no</name>
+        <rename>prospect_tax_no</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_religion</name>
+        <rename>prospect_religion</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_marital_status</name>
+        <rename>prospect_marital_status</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_job</name>
+        <rename>prospect_job</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_job_level</name>
+        <rename>prospect_job_level</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_gross_salary</name>
+        <rename>prospect_gross_salary</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_other_income</name>
+        <rename>prospect_other_income</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_purpose_policy</name>
+        <rename>prospect_purpose_policy</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_hobby</name>
+        <rename>prospect_hobby</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_height</name>
+        <rename>prospect_height</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_weight</name>
+        <rename>prospect_weight</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_group_id</name>
+        <rename>prospect_group_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_batch_id</name>
+        <rename>prospect_batch_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_key</name>
+        <rename>prospect_key</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_status</name>
+        <rename>prospect_status</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_customer_id</name>
+        <rename>prospect_customer_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>prospect_no</name>
+        <rename>prospect_no</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>528</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>quote_coverage</name>
+    <type>TableInput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>Life21prod</connection>
+    <sql>SELECT * FROM `quote_coverage` p
+ORDER BY p.`quote_coverage_id` DESC
+LIMIT 10000</sql>
+    <limit>0</limit>
+    <lookup />
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>160</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Update Data AC 2 2</name>
+    <type>InsertUpdate</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <connection>Life21Dev2</connection>
+    <commit>5000</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema />
+      <table>quote_coverage</table>
+      <key>
+        <name>quote_coverage_id</name>
+        <field>quote_coverage_id</field>
+        <condition>=</condition>
+        <name2 />
+      </key>
+      <value>
+        <name>quote_coverage_id</name>
+        <rename>quote_coverage_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>quote_id</name>
+        <rename>quote_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>coverage_type_id</name>
+        <rename>coverage_type_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>insured_type</name>
+        <rename>insured_type</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>sum_insured</name>
+        <rename>sum_insured</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>commence_dt</name>
+        <rename>commence_dt</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>premium_rate</name>
+        <rename>premium_rate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>premium_amount</name>
+        <rename>premium_amount</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>due_dt</name>
+        <rename>due_dt</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>duration</name>
+        <rename>duration</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>duration_days</name>
+        <rename>duration_days</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>premium_factor</name>
+        <rename>premium_factor</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_insured_id</name>
+        <rename>quote_insured_id</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>disc_rate</name>
+        <rename>disc_rate</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>quote_sequence_id</name>
+        <rename>quote_sequence_id</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step_error_handling>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
